@@ -5,8 +5,12 @@ import hello.board.model.entity.BoardStatus;
 import hello.board.model.response.BoardResponse;
 import hello.board.respository.BoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -14,6 +18,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class BoardService {
 
     private final BoardRepository boardRepository;
+
+    public List<BoardResponse> searchBoardList(int page, int pageSize, Sort.Direction direction) {
+        return boardRepository.findAll(PageRequest.of(page, pageSize, Sort.by(direction, "boardNo")))
+                .map(BoardResponse::from)
+                .toList();
+    }
 
     public BoardResponse getBoard(Long boardNo) {
         return boardRepository.findById(boardNo)
