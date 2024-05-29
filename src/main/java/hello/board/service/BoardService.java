@@ -31,4 +31,13 @@ public class BoardService {
                 }).map(BoardResponse::from)
                 .orElseThrow(() -> new RuntimeException("존재하지 않는 게시글입니다."));
     }
+
+    public Long deleteBoard(Long boardNo) {
+        return boardRepository.findById(boardNo)
+                .map(board -> {
+                    boardRepository.delete(board);
+                    return board.getBoardNo(); // 게시물 번호
+                })
+                .orElseThrow(() -> new RuntimeException("존재하지 않는 게시글입니다."));
+    }
 }
