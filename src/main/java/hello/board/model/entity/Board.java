@@ -28,6 +28,15 @@ public class Board {
     @Enumerated(EnumType.STRING)
     private BoardStatus boardStatus; // 게시판 상태 값(soft delete 를 하기 때문에 상태 값으로 관리)
 
-    @OneToMany(mappedBy = "board")
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
     private List<Comment> comments = new ArrayList<>(); // 게시글에는 여러 개의 댓글이 있음
+
+    public Board addComment(String commentBody) {
+        Comment comment = new Comment();
+        comment.setBody(commentBody);
+        comment.setBoard(this); // 댓글이 게시글을 가지고 있음
+        comment.setCommentStatus(CommentStatus.ACTIVE);
+        this.comments.add(comment); // 게시글도 댓글을 가지고 있음
+        return this;
+    }
 }

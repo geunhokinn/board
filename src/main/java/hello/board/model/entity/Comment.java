@@ -11,7 +11,7 @@ import org.hibernate.annotations.Where;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Where(clause = "comment_status='ACTIVE") // 삭제되지 않은 것만 조회
+@Where(clause = "comment_status='ACTIVE'") // 삭제되지 않은 것만 조회
 @SQLDelete(sql = "UPDATE comment SET comment_status='DELETE' WHERE comment_no=?") // soft delete
 public class Comment {
 
@@ -24,7 +24,7 @@ public class Comment {
     @Enumerated(EnumType.STRING) // enum 타입 DB 에 String 으로 저장
     private CommentStatus commentStatus; // 댓글 상태 값(soft delete 를 하기 때문에 상태 값으로 관리)
 
-    @ManyToOne
+    @ManyToOne // 기본 값 즉시 로딩
 //    @JoinColumn 생략
     private Board board;
 }
