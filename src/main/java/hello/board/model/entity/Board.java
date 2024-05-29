@@ -28,7 +28,7 @@ public class Board {
     @Enumerated(EnumType.STRING)
     private BoardStatus boardStatus; // 게시판 상태 값(soft delete 를 하기 때문에 상태 값으로 관리)
 
-    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL) // 지연 로딩 -> 게시글 조회 시 로딩이 안됨
     private List<Comment> comments = new ArrayList<>(); // 게시글에는 여러 개의 댓글이 있음
 
     public Board addComment(String commentBody) {

@@ -2,6 +2,7 @@ package hello.board.service;
 
 import hello.board.model.response.BoardResponse;
 import hello.board.respository.BoardRepository;
+import hello.board.respository.BoardRepositoryCustom;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,9 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 public class CommentService {
 
     private final BoardRepository boardRepository;
+    private final BoardRepositoryCustom boardRepositoryCustom;
 
     public BoardResponse postComment(Long boardId, String commentBody) {
-        return boardRepository.findById(boardId)
+        return boardRepositoryCustom.find(boardId)
                 .map(board -> {
                     board.addComment(commentBody); // 게시글에 댓글 추가
                     return board;
