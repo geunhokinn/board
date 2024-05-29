@@ -14,6 +14,12 @@ public class BoardController {
 
     private final BoardService boardService;
 
+    // 게시글 조회(단일 게시글 조회)
+    @GetMapping("board")
+    public BoardResponse searchBoard(@RequestParam Long boardNo) {
+        return boardService.getBoard(boardNo);
+    }
+
     // 게시글 작성
     @PostMapping("board")
     public BoardResponse writeBoard(@RequestBody BoardWriteRequest boardWriteRequest) {
