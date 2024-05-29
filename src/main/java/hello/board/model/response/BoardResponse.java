@@ -9,7 +9,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Builder // 빌더 패턴
-public class BoardWriteResponse {
+public class BoardResponse {
 
     private Long boardNo;
     private String title;
@@ -17,8 +17,8 @@ public class BoardWriteResponse {
     private BoardStatus boardStatus;
     // 댓글 이따가 추가
 
-    static public BoardWriteResponse from(Board board) {
-        return new BoardWriteResponse(
+    static public BoardResponse from(Board board) {
+        return new BoardResponse(
                 board.getBoardNo(),
                 board.getTitle(),
                 board.getBody(),
