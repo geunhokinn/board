@@ -14,7 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Where(clause = "board_status='ACTIVE") // 삭제되지 않은 것만 조회
+@Where(clause = "board_status='ACTIVE'") // 삭제되지 않은 것만 조회
 @SQLDelete(sql = "UPDATE board SET board_status='DELETE' WHERE board_no=?") // soft delete
 public class Board {
 
