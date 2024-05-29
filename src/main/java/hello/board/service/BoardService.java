@@ -15,6 +15,12 @@ public class BoardService {
 
     private final BoardRepository boardRepository;
 
+    public BoardResponse getBoard(Long boardNo) {
+        return boardRepository.findById(boardNo)
+                .map(BoardResponse::from)
+                .orElseThrow(() -> new RuntimeException("존재하지 않는 게시글입니다."));
+    }
+
     public BoardResponse writeBoard(String title, String body) {
         Board board = new Board();
         board.setTitle(title);
