@@ -1,14 +1,12 @@
 package hello.board.controller;
 
+import hello.board.model.request.BoardDeleteRequest;
 import hello.board.model.request.BoardEditRequest;
 import hello.board.model.request.BoardWriteRequest;
 import hello.board.model.response.BoardResponse;
 import hello.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -27,4 +25,11 @@ public class BoardController {
     public BoardResponse editBoard(@RequestBody BoardEditRequest boardEditRequest) {
         return boardService.editBoard(boardEditRequest.getBoardNo(), boardEditRequest.getBody());
     }
+
+    // 게시글 삭제
+    @DeleteMapping("board")
+    public Long deleteBoard(@RequestBody BoardDeleteRequest boardDeleteRequest) {
+        return boardService.deleteBoard(boardDeleteRequest.getBoardNo());
+    }
+
 }
